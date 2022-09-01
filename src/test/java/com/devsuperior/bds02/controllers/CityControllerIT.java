@@ -43,6 +43,7 @@ public class CityControllerIT {
 		result.andExpect(jsonPath("$[2].name").value("Brasília"));
 	}
 	
+	/*
 	@Test
 	public void insertShouldInsertResource() throws Exception {
 
@@ -94,4 +95,5 @@ public class CityControllerIT {
 				
 		result.andExpect(status().isBadRequest());
 	}
+	*/
 }
