@@ -43,7 +43,7 @@ public class CityControllerIT {
 		result.andExpect(jsonPath("$[2].name").value("Brasília"));
 	}
 	
-	/*
+	
 	@Test
 	public void insertShouldInsertResource() throws Exception {
 
@@ -61,6 +61,7 @@ public class CityControllerIT {
 		result.andExpect(jsonPath("$.name").value("Recife"));
 	}
 
+	/*
 	@Test
 	public void deleteShouldReturnNoContentWhenIndependentId() throws Exception {		
 		
