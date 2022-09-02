@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +16,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.devsuperior.bds02.dto.CityDTO;
 import com.devsuperior.bds02.entities.City;
 import com.devsuperior.bds02.repositories.CityRepository;
+import com.devsuperior.bds02.services.exceptions.DataBaseException;
+import com.devsuperior.bds02.services.exceptions.ResourceNotFoundException;
 
 
 
@@ -46,6 +50,18 @@ public class CityService {
 		entidade = repository.save(entidade);
 		return new CityDTO(entidade);
 		
+	}
+	// vai disparar exceção se tentar excluir City com id inexistente
+	// vai disparar exceção se tentar excluir um City que já tem evento cadastrado (erro de integridade relacional do database)
+	
+	public void delete(long id) {
+		try {
+			repository.deleteById(id); //codigo 204
+		} catch(EmptyResultDataAccessException error) {
+			throw new ResourceNotFoundException("Id de número: " + id + " não encontrado."); //codigo 404
+		} catch (DataIntegrityViolationException error) {
+			throw new DataBaseException("Violação de integridade de Banco de dados. Não é possível excluir cidade de id: " + id); //codigo 440 badRquest
+		}
 	}
 	
 	

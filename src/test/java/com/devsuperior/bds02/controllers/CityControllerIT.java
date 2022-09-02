@@ -61,7 +61,7 @@ public class CityControllerIT {
 		result.andExpect(jsonPath("$.name").value("Recife"));
 	}
 
-	/*
+	
 	@Test
 	public void deleteShouldReturnNoContentWhenIndependentId() throws Exception {		
 		
@@ -96,5 +96,5 @@ public class CityControllerIT {
 				
 		result.andExpect(status().isBadRequest());
 	}
-	*/
+	
 }
