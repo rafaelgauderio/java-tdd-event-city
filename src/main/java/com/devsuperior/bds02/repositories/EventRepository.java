@@ -1,9 +1,11 @@
 package com.devsuperior.bds02.repositories;
 
-import org.springframework.data.repository.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import com.devsuperior.bds02.entities.Event;
 
-public interface EventRepository extends Repository<Event, Long>{
+@Repository
+public interface EventRepository extends JpaRepository<Event, Long>{
 
 }
