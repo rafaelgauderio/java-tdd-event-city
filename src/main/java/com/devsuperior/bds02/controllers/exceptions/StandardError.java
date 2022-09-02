@@ -3,6 +3,7 @@ package com.devsuperior.bds02.controllers.exceptions;
 import java.io.Serializable;
 import java.time.Instant;
 
+
 public class StandardError implements Serializable {
 
 	
