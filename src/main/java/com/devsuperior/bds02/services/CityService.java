@@ -1,7 +1,10 @@
 package com.devsuperior.bds02.services;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
+
+import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -11,6 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.devsuperior.bds02.dto.CityDTO;
 import com.devsuperior.bds02.entities.City;
 import com.devsuperior.bds02.repositories.CityRepository;
+
+
 
 @Service
 public class CityService {
@@ -26,6 +31,13 @@ public class CityService {
 		
 	}
 	
+	public CityDTO findById(Long id) {
+		Optional<City> object = repository.findById(id);
+		City entity = object.orElseThrow(() -> new EntityNotFoundException("Cidade não encontrada com essa id"));
+		CityDTO cityDto = new CityDTO(entity);
+		return cityDto;
+	}
+	
 	@Transactional
 	public CityDTO insert (CityDTO dto) {
 		
@@ -35,5 +47,7 @@ public class CityService {
 		return new CityDTO(entidade);
 		
 	}
+	
+	
 
 }
